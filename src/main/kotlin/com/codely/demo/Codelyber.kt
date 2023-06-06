@@ -14,7 +14,7 @@ fun main() {
         LocalDate.parse(it)
     }.apply {
         // to make mutations
-        if(this == null) {
+        if (this == null) {
             println("The date is not valid")
             exitProcess(1)
         }
@@ -23,13 +23,11 @@ fun main() {
         println("You wrote $it")
     }.run {
         // returns the inside block execution result
-        with( Period.between(this, LocalDate.now())){
+        with(Period.between(this, LocalDate.now())) {
             // to avoid declaring variables
             println("The difference between the date you wrote and today is ${this.years} years")
         }
     }
-
-
 }
 
 fun supportNullableString(line: String?) = line
