@@ -35,6 +35,7 @@ private fun LocalDate.calculateDifference() = with(Period.between(this, LocalDat
     when {
         // when is similar to a switch or an if-else
         // this keyword is not neccesary (years instead this.years)
+        years >= 18 -> println("The difference between the date you wrote and today is $years years (>= 18 years)")
         years > 0 -> println("The difference between the date you wrote and today is $years years")
         months > 0 -> println("The difference between the date you wrote and today is $months months")
         days > 0 -> println("The difference between the date you wrote and today is $days days")
