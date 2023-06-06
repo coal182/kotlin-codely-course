@@ -21,19 +21,22 @@ fun main() {
     }?.also {
         // side effect
         println("You wrote $it")
-    }.run {
+    }?.run {
         // returns the inside block execution result
-        with(Period.between(this, LocalDate.now())) {
-            // to avoid declaring variables
-            when {
-                // when is similar to a switch or an if-else
-                // this keyword is not neccesary (years instead this.years)
-                years > 0 -> println("The difference between the date you wrote and today is $years years")
-                months > 0 -> println("The difference between the date you wrote and today is $months months")
-                days > 0 -> println("The difference between the date you wrote and today is $days days")
-            }
-        }
+        calculateDifference()
     }
 }
 
 fun supportNullableString(line: String?) = line
+
+// Extension function
+private fun LocalDate.calculateDifference() = with(Period.between(this, LocalDate.now())) {
+    // to avoid declaring variables
+    when {
+        // when is similar to a switch or an if-else
+        // this keyword is not neccesary (years instead this.years)
+        years > 0 -> println("The difference between the date you wrote and today is $years years")
+        months > 0 -> println("The difference between the date you wrote and today is $months months")
+        days > 0 -> println("The difference between the date you wrote and today is $days days")
+    }
+}
