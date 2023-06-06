@@ -1,9 +1,12 @@
 package com.codely.demo
 
-class Codelyber {
-    fun greet() = "Welcome to kotlin skeleton course!!!"
-}
+import java.time.LocalDate
 
 fun main() {
-    println(Codelyber().greet())
+    println("Please enter a date with format <yyyy-mm-dd>")
+    val readLine: String? = null
+    readLine?.let {
+        val input = LocalDate.parse(readLine)
+        println("You wrote $input ${input.dayOfWeek}")
+    }
 }
