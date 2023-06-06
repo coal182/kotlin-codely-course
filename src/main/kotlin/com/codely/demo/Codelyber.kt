@@ -1,7 +1,7 @@
 package com.codely.demo
 
 class Codelyber {
-    fun greet() = "Welcome to kotlin skeleton!!!"
+    fun greet() = "Welcome to kotlin skeleton course!!!"
 }
 
 fun main() {
