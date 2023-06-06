@@ -25,7 +25,14 @@ fun main() {
         // returns the inside block execution result
         with(Period.between(this, LocalDate.now())) {
             // to avoid declaring variables
-            println("The difference between the date you wrote and today is ${this.years} years")
+            when {
+                // when is similar to a switch or an if-else
+                // this keyword is not neccesary (years instead this.years)
+                years > 0 -> println("The difference between the date you wrote and today is $years years")
+                months > 0 -> println("The difference between the date you wrote and today is $months months")
+                days > 0 -> println("The difference between the date you wrote and today is $days days")
+
+            }
         }
     }
 }
