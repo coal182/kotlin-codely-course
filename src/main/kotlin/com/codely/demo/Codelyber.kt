@@ -31,7 +31,6 @@ fun main() {
                 years > 0 -> println("The difference between the date you wrote and today is $years years")
                 months > 0 -> println("The difference between the date you wrote and today is $months months")
                 days > 0 -> println("The difference between the date you wrote and today is $days days")
-
             }
         }
     }
