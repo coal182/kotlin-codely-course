@@ -7,8 +7,9 @@ import kotlin.test.assertEquals
 
 class CatTest {
     private val id = "92efe4c8-fab9-4cb0-82d9-5c75eeca2dc1"
-    private val name = "Mandarina"
-    private val origin = "Shelter"
+    private val name = "Trina"
+    private val origin = "Vet Shelter"
+    private val toy = "Feathers"
     private val birthDate = "2019-01-01"
     private val fixedDate = LocalDate.of(2021, 8, 31)
 
@@ -18,6 +19,7 @@ class CatTest {
             id = UUID.fromString(id),
             name = name,
             origin = origin,
+            toy = toy,
             birthDate = LocalDate.parse(birthDate),
             createdAt = fixedDate,
         )
@@ -25,6 +27,7 @@ class CatTest {
             id = UUID.fromString(id),
             name = name,
             origin = origin,
+            toy = toy,
             vaccinated = true,
             birthDate = LocalDate.parse(birthDate),
             createdAt = fixedDate,
@@ -39,6 +42,7 @@ class CatTest {
             id = UUID.fromString(id),
             name = name,
             origin = origin,
+            toy = toy,
             birthDate = LocalDate.parse(birthDate),
             createdAt = fixedDate,
         )
@@ -46,6 +50,7 @@ class CatTest {
             id = UUID.fromString(id),
             name = name,
             origin = origin,
+            toy = toy,
             vaccinated = false,
             birthDate = LocalDate.parse(birthDate),
             createdAt = fixedDate,
