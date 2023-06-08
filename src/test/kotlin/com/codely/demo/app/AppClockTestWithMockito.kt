@@ -1,4 +1,4 @@
-package com.codely.demo
+package com.codely.demo.app
 
 import com.codely.demo.shared.Clock
 import com.codely.demo.shared.Reader
@@ -11,7 +11,7 @@ import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 import java.time.LocalDate
 
-class AppTestWithMockito {
+class AppClockTestWithMockito {
 
     @Test
     fun `should calculate the difference and return 31 years`() {
@@ -19,7 +19,7 @@ class AppTestWithMockito {
         val writer = mock<Writer>()
         val clock = mock<Clock>()
 
-        val app = App(reader, writer, clock)
+        val app = AppClock(reader, writer, clock)
 
         whenever(reader.read()).thenReturn("1990-08-31")
         whenever(clock.now()).thenReturn(LocalDate.parse("2021-09-02"))
@@ -35,7 +35,7 @@ class AppTestWithMockito {
         val reader = mock<Reader>()
         val writer = mock<Writer>()
         val clock = mock<Clock>()
-        val app = App(reader, writer, clock)
+        val app = AppClock(reader, writer, clock)
         whenever(reader.read()).thenReturn("2020-09-03")
         whenever(clock.now()).thenReturn(LocalDate.parse("2021-09-02"))
 
@@ -51,7 +51,7 @@ class AppTestWithMockito {
         val reader = mock<Reader>()
         val writer = mock<Writer>()
         val clock = mock<Clock>()
-        val app = App(reader, writer, clock)
+        val app = AppClock(reader, writer, clock)
         whenever(reader.read()).thenReturn("2021-08-31")
         whenever(clock.now()).thenReturn(LocalDate.parse("2021-09-02"))
         doNothing().`when`(writer).write(any())
@@ -66,7 +66,7 @@ class AppTestWithMockito {
         val reader = mock<Reader>()
         val writer = mock<Writer>()
         val clock = mock<Clock>()
-        val app = App(reader, writer, clock)
+        val app = AppClock(reader, writer, clock)
         doNothing().`when`(writer).write(any())
         whenever(reader.read()).thenReturn("")
 
@@ -80,7 +80,7 @@ class AppTestWithMockito {
         val reader = mock<Reader>()
         val writer = mock<Writer>()
         val clock = mock<Clock>()
-        val app = App(reader, writer, clock)
+        val app = AppClock(reader, writer, clock)
         doNothing().`when`(writer).write(any())
         whenever(reader.read()).thenReturn(" ")
 

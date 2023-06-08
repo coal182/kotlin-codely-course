@@ -1,4 +1,4 @@
-package com.codely.demo
+package com.codely.demo.app
 
 import com.codely.demo.shared.Clock
 import com.codely.demo.shared.Reader
@@ -7,7 +7,7 @@ import java.time.LocalDate
 import java.time.Period
 import kotlin.system.exitProcess
 
-open class App(private val reader: Reader, private val writer: Writer, private val clock: Clock) {
+open class AppClock(private val reader: Reader, private val writer: Writer, private val clock: Clock) {
     fun execute() {
         writer.write("Please enter a date with format <yyyy-MM-dd>")
         val line = reader.read()
