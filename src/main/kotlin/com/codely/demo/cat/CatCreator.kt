@@ -16,23 +16,29 @@ class CatCreator(val reader: Reader, val writer: Writer, val clock: Clock) {
         val origin = reader.read()
         writer.write("Is your cat vaccinated?")
         val vaccinated = reader.read()
-        writer.write("Is your cat dewormed")
-        val dewormed = reader.read()
         writer.write("When did your cat birth?")
         val birthDate = reader.read()
 
-        if (name.isNullOrBlank() || name.isNullOrEmpty() || origin.isNullOrBlank() || origin.isNullOrEmpty() || vaccinated.isNullOrBlank() || vaccinated.isNullOrEmpty() || dewormed.isNullOrBlank() || dewormed.isNullOrEmpty() || birthDate.isNullOrBlank() || birthDate.isNullOrEmpty()) {
+        if (name.isNullOrBlank() || name.isNullOrEmpty() || origin.isNullOrBlank() || origin.isNullOrEmpty()) {
             throw IllegalArgumentException()
         }
 
-        return Cat(
-            id = UUID.fromString(id),
-            name = name,
-            origin = origin,
-            vaccinated = vaccinated.toBoolean(),
-            dewormed = dewormed.toBoolean(),
-            birthDate = LocalDate.parse(birthDate),
-            createdAt = clock.now(),
-        )
+        return if (vaccinated.toBoolean()) {
+            Cat.vaccinatedWith(
+                id = UUID.fromString(id),
+                name = name,
+                origin = origin,
+                birthDate = LocalDate.parse(birthDate),
+                createdAt = clock.now(),
+            )
+        } else {
+            Cat.notVaccinatedWith(
+                id = UUID.fromString(id),
+                name = name,
+                origin = origin,
+                birthDate = LocalDate.parse(birthDate),
+                createdAt = clock.now(),
+            )
+        }
     }
 }
