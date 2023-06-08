@@ -11,6 +11,7 @@ class CatTest {
     private val origin = "Vet Shelter"
     private val toy = "Feathers"
     private val birthDate = "2019-01-01"
+    private val color = "orange"
     private val fixedDate = LocalDate.of(2021, 8, 31)
 
     @Test
@@ -21,6 +22,7 @@ class CatTest {
             origin = origin,
             toy = toy,
             birthDate = LocalDate.parse(birthDate),
+            color = color,
             createdAt = fixedDate,
         )
         val expectedCat = Cat(
@@ -30,6 +32,7 @@ class CatTest {
             toy = toy,
             vaccinated = true,
             birthDate = LocalDate.parse(birthDate),
+            color = Cat.Color.valueOf(color.uppercase()),
             createdAt = fixedDate,
         )
 
@@ -44,6 +47,7 @@ class CatTest {
             origin = origin,
             toy = toy,
             birthDate = LocalDate.parse(birthDate),
+            color = color,
             createdAt = fixedDate,
         )
         val expectedCat = Cat(
@@ -53,6 +57,7 @@ class CatTest {
             toy = toy,
             vaccinated = false,
             birthDate = LocalDate.parse(birthDate),
+            color = Cat.Color.valueOf(color.uppercase()),
             createdAt = fixedDate,
         )
 

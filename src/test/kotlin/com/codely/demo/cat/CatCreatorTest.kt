@@ -18,6 +18,7 @@ class CatCreatorTest {
     private val toy = "Feathers"
     private val vaccinated = "true"
     private val birthDate = "2019-01-01"
+    private val color = "orange"
     private val fixedDate = LocalDate.of(2021, 8, 31)
 
     @Test
@@ -27,7 +28,7 @@ class CatCreatorTest {
         val clock = mockk<Clock>()
         val repository = InMemoryCatRepository()
         every { clock.now() } returns fixedDate
-        every { reader.read() } returns id andThen name andThen origin andThen toy andThen vaccinated andThen birthDate
+        every { reader.read() } returns id andThen name andThen origin andThen toy andThen vaccinated andThen birthDate andThen color
 
         val creator = CatCreator(reader, writer, clock, repository)
         creator.create()
@@ -39,6 +40,7 @@ class CatCreatorTest {
             toy,
             vaccinated.toBoolean(),
             LocalDate.parse(birthDate),
+            Cat.Color.valueOf(color.uppercase()),
             fixedDate,
         )
 
@@ -53,7 +55,7 @@ class CatCreatorTest {
         val repository = InMemoryCatRepository()
 
         every { clock.now() } returns fixedDate
-        every { reader.read() } returns id andThen "" andThen origin andThen toy andThen vaccinated andThen birthDate
+        every { reader.read() } returns id andThen "" andThen origin andThen toy andThen vaccinated andThen birthDate andThen color
 
         val creator = CatCreator(reader, writer, clock, repository)
         assertThrows<IllegalArgumentException> { creator.create() }
@@ -67,7 +69,7 @@ class CatCreatorTest {
         val repository = InMemoryCatRepository()
 
         every { clock.now() } returns fixedDate
-        every { reader.read() } returns id andThen "  " andThen origin andThen toy andThen vaccinated andThen birthDate
+        every { reader.read() } returns id andThen "  " andThen origin andThen toy andThen vaccinated andThen birthDate andThen color
 
         val creator = CatCreator(reader, writer, clock, repository)
         assertThrows<IllegalArgumentException> { creator.create() }
@@ -81,7 +83,7 @@ class CatCreatorTest {
         val repository = InMemoryCatRepository()
 
         every { clock.now() } returns fixedDate
-        every { reader.read() } returns id andThen name andThen "" andThen toy andThen vaccinated andThen birthDate
+        every { reader.read() } returns id andThen name andThen "" andThen toy andThen vaccinated andThen birthDate andThen color
 
         val creator = CatCreator(reader, writer, clock, repository)
         assertThrows<IllegalArgumentException> { creator.create() }
@@ -95,7 +97,7 @@ class CatCreatorTest {
         val repository = InMemoryCatRepository()
 
         every { clock.now() } returns fixedDate
-        every { reader.read() } returns id andThen name andThen "  " andThen toy andThen vaccinated andThen birthDate
+        every { reader.read() } returns id andThen name andThen "  " andThen toy andThen vaccinated andThen birthDate andThen color
 
         val creator = CatCreator(reader, writer, clock, repository)
         assertThrows<IllegalArgumentException> { creator.create() }

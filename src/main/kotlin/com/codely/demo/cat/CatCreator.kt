@@ -20,8 +20,10 @@ class CatCreator(val reader: Reader, val writer: Writer, val clock: Clock, val r
         val vaccinated = reader.read()
         writer.write("When did your cat birth?")
         val birthDate = reader.read()
+        writer.write("What color your cat is?")
+        val color = reader.read()
 
-        if (name.isNullOrBlank() || name.isNullOrEmpty() || origin.isNullOrBlank() || origin.isNullOrEmpty() || toy.isNullOrBlank() || toy.isNullOrEmpty()) {
+        if (name.isNullOrBlank() || name.isNullOrEmpty() || origin.isNullOrBlank() || origin.isNullOrEmpty() || toy.isNullOrBlank() || toy.isNullOrEmpty() || color.isNullOrBlank() || color.isNullOrEmpty()) {
             throw IllegalArgumentException()
         }
 
@@ -32,6 +34,7 @@ class CatCreator(val reader: Reader, val writer: Writer, val clock: Clock, val r
                 origin = origin,
                 toy = toy,
                 birthDate = LocalDate.parse(birthDate),
+                color = color,
                 createdAt = clock.now(),
             )
             repository.save(cat)
@@ -43,6 +46,7 @@ class CatCreator(val reader: Reader, val writer: Writer, val clock: Clock, val r
                 origin = origin,
                 toy = toy,
                 birthDate = LocalDate.parse(birthDate),
+                color = color,
                 createdAt = clock.now(),
             )
             repository.save(cat)

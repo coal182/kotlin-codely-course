@@ -10,8 +10,12 @@ data class Cat( // DataClasses
     val toy: String,
     val vaccinated: Boolean,
     val birthDate: LocalDate,
+    val color: Color,
     val createdAt: LocalDate,
 ) {
+    enum class Color {
+        BLACK, RED, CINNAMON, BLUE, CREAM, LILAC, FAWN, WHITE, ORANGE
+    }
     companion object {
         fun vaccinatedWith(
             id: UUID,
@@ -19,6 +23,7 @@ data class Cat( // DataClasses
             origin: String,
             toy: String,
             birthDate: LocalDate,
+            color: String,
             createdAt: LocalDate,
         ) = Cat(
             id = id,
@@ -27,6 +32,7 @@ data class Cat( // DataClasses
             toy = toy,
             vaccinated = true,
             birthDate = birthDate,
+            color = Color.valueOf(color.uppercase()),
             createdAt = createdAt,
         )
 
@@ -36,6 +42,7 @@ data class Cat( // DataClasses
             origin: String,
             toy: String,
             birthDate: LocalDate,
+            color: String,
             createdAt: LocalDate,
         ) = Cat(
             id = id,
@@ -44,6 +51,7 @@ data class Cat( // DataClasses
             toy = toy,
             vaccinated = false,
             birthDate = birthDate,
+            color = Color.valueOf(color.uppercase()),
             createdAt = createdAt,
         )
     }
