@@ -1,5 +1,8 @@
 package com.codely.demo
 
+import com.codely.demo.shared.Clock
+import com.codely.demo.shared.Reader
+import com.codely.demo.shared.Writer
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify

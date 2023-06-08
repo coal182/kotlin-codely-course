@@ -1,19 +1,11 @@
 package com.codely.demo
 
+import com.codely.demo.shared.Clock
+import com.codely.demo.shared.Reader
+import com.codely.demo.shared.Writer
 import java.time.LocalDate
 import java.time.Period
 import kotlin.system.exitProcess
-
-class Reader {
-    fun read() = readLine()
-}
-class Writer {
-    fun write(message: String) = println(message)
-}
-
-class Clock {
-    fun now(): LocalDate = LocalDate.now()
-}
 
 open class App(private val reader: Reader, private val writer: Writer, private val clock: Clock) {
     fun execute() {

@@ -1,5 +1,8 @@
 package com.codely.demo
 
+import com.codely.demo.shared.Clock
+import com.codely.demo.shared.Reader
+import com.codely.demo.shared.Writer
 import org.junit.jupiter.api.Test
 import org.mockito.kotlin.any
 import org.mockito.kotlin.doNothing
