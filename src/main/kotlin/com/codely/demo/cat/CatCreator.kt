@@ -8,29 +8,30 @@ import java.util.*
 
 class CatCreator(val reader: Reader, val writer: Writer, val clock: Clock, val repository: CatRepository) {
     fun create(): Cat {
-        writer.write("Please enter an id for your cat")
-        val id = reader.read()
-        writer.write("Please enter the name of your cat")
-        val name = reader.read()
-        writer.write("Please enter where your cat came from")
-        val origin = reader.read()
-        writer.write("What is your cat's favourite toy?")
-        val toy = reader.read()
-        writer.write("Is your cat vaccinated?")
-        val vaccinated = reader.read()
-        writer.write("When did your cat birth?")
-        val birthDate = reader.read()
-        writer.write("What color your cat is?")
-        val color = reader.read()
+        val id = obtainInput("Please enter an id for your cat")
+        val name = Name.from(obtainInput("Please enter the name of your cat"))
+        val origin = obtainInput("Please enter where your cat came from")
+        val toy = obtainInput("What is your cat's favourite toy?")
+        val vaccinated = obtainInput("Is your cat vaccinated?")
+        val color = obtainInput("What color your cat is?")
+        val birthDate = obtainInput("When did your cat birth?")
 
-        if (name.isNullOrBlank() || name.isNullOrEmpty() || origin.isNullOrBlank() || origin.isNullOrEmpty() || toy.isNullOrBlank() || toy.isNullOrEmpty() || color.isNullOrBlank() || color.isNullOrEmpty()) {
-            throw IllegalArgumentException()
+        if (origin.isNullOrBlank() || origin.isNullOrEmpty()) {
+            throw InvalidOrigin(origin)
+        }
+
+        if (toy.isNullOrBlank() || toy.isNullOrEmpty()) {
+            throw InvalidToy(toy)
+        }
+
+        if (color.isNullOrBlank() || color.isNullOrEmpty()) {
+            throw InvalidColor(color)
         }
 
         if (vaccinated.toBoolean()) {
             val cat = Cat.vaccinatedWith(
                 id = UUID.fromString(id),
-                name = name,
+                name = name.value,
                 origin = origin,
                 toy = toy,
                 birthDate = LocalDate.parse(birthDate),
@@ -42,7 +43,7 @@ class CatCreator(val reader: Reader, val writer: Writer, val clock: Clock, val r
         } else {
             val cat = Cat.notVaccinatedWith(
                 id = UUID.fromString(id),
-                name = name,
+                name = name.value,
                 origin = origin,
                 toy = toy,
                 birthDate = LocalDate.parse(birthDate),
@@ -53,4 +54,6 @@ class CatCreator(val reader: Reader, val writer: Writer, val clock: Clock, val r
             return cat
         }
     }
+
+    private fun obtainInput(message: String) = writer.write(message).run { reader.read() }
 }

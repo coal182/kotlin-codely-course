@@ -14,7 +14,14 @@ data class Cat( // DataClasses
     val createdAt: LocalDate,
 ) {
     enum class Color {
-        BLACK, RED, CINNAMON, BLUE, CREAM, LILAC, FAWN, WHITE, ORANGE
+        BLACK, RED, CINNAMON, BLUE, CREAM, LILAC, FAWN, WHITE, ORANGE;
+        companion object {
+            fun from(value: String?) = if (value.isNullOrBlank() || value.isNullOrEmpty()) {
+                throw InvalidColor(value)
+            } else {
+                valueOf(value.uppercase())
+            }
+        }
     }
     companion object {
         fun vaccinatedWith(
