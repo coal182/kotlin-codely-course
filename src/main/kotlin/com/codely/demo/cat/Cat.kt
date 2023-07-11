@@ -14,6 +14,7 @@ data class Cat( // DataClasses
     val birthDate: BirthDate,
     val color: Color,
     val age: Int,
+    val breed: Breed,
     val createdAt: LocalDate,
 ) {
     enum class Color {
@@ -37,6 +38,7 @@ data class Cat( // DataClasses
             birthDate: BirthDate,
             color: Color,
             vaccinated: Vaccinated,
+            breed: Breed,
             createdAt: LocalDate,
         ) = Cat(
             id = id,
@@ -47,6 +49,7 @@ data class Cat( // DataClasses
             birthDate = birthDate,
             color = color,
             age = AgeCalculator.calculate(birthDate.value, createdAt).years,
+            breed = breed,
             createdAt = createdAt,
         )
     }
@@ -114,4 +117,6 @@ data class Cat( // DataClasses
             }
         }
     }
+
+    data class Breed(val value: String)
 }

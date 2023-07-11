@@ -11,3 +11,4 @@ class InvalidToy(toy: String?) : CatCreationException("<$toy is not a valid toy"
 class InvalidVaccinated(vaccinated: String?) : CatCreationException("<$vaccinated> is not a valid vaccinated value use true or false instead")
 class InvalidId(id: String?) : CatCreationException("<$id> is not a valid uuid value")
 class InvalidBirthDate(birthDate: String?) : CatCreationException("<$birthDate> is not a valid date, the date should follow this format <yyy-mm-dd>")
+class InvalidBreed(breed: String?) : CatCreationException("<$breed> is not a valid breed")

@@ -13,6 +13,7 @@ class CatTest {
     private val birthDate = "2019-01-01"
     private val color = "orange"
     private val fixedDate = LocalDate.of(2021, 8, 31)
+    private val breed = "Abyssinian"
 
     @Test
     fun `should create a vaccinated cat`() {
@@ -25,6 +26,7 @@ class CatTest {
             color = Cat.Color.from(color),
             vaccinated = Cat.Vaccinated.from("true"),
             createdAt = fixedDate,
+            breed = Cat.Breed(breed),
         )
         val expectedCat = Cat(
             id = Cat.Id.from(id),
@@ -36,6 +38,7 @@ class CatTest {
             vaccinated = Cat.Vaccinated.from("true"),
             age = AgeCalculator.calculate(LocalDate.parse(birthDate), fixedDate).years,
             createdAt = fixedDate,
+            breed = Cat.Breed(breed),
         )
 
         assertEquals(expectedCat, actualCat)
@@ -52,6 +55,7 @@ class CatTest {
             color = Cat.Color.from(color),
             vaccinated = Cat.Vaccinated.from("false"),
             createdAt = fixedDate,
+            breed = Cat.Breed(breed),
         )
         val expectedCat = Cat(
             id = Cat.Id.from(id),
@@ -63,6 +67,7 @@ class CatTest {
             vaccinated = Cat.Vaccinated.from("false"),
             age = AgeCalculator.calculate(LocalDate.parse(birthDate), fixedDate).years,
             createdAt = fixedDate,
+            breed = Cat.Breed(breed),
         )
 
         assertEquals(expectedCat, actualCat)
