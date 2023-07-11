@@ -21,6 +21,7 @@ dependencies {
     implementation("org.http4k:http4k-core:4.12.3.0")
     implementation("org.json:json:20210307")
     implementation("com.diffplug.spotless:spotless-plugin-gradle:6.17.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test")
 
