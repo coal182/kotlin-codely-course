@@ -3,57 +3,32 @@ package com.codely.demo.cat
 import com.codely.demo.shared.Clock
 import com.codely.demo.shared.Reader
 import com.codely.demo.shared.Writer
-import java.time.LocalDate
-import java.util.*
 
 class CatCreator(val reader: Reader, val writer: Writer, val clock: Clock, val repository: CatRepository) {
     fun create(): Cat {
-        val id = obtainInput("Please enter an id for your cat")
-        val name = Name.from(obtainInput("Please enter the name of your cat"))
-        val origin = obtainInput("Please enter where your cat came from")
-        val toy = obtainInput("What is your cat's favourite toy?")
-        val vaccinated = obtainInput("Is your cat vaccinated?")
-        val color = obtainInput("What color your cat is?")
-        val birthDate = obtainInput("When did your cat birth?")
+        val id = Cat.Id.from(obtainInput("Please enter an id for your cat"))
+        val name = Cat.Name.from(obtainInput("Please enter the name of your cat"))
+        val origin = Cat.Origin.from(obtainInput("Please enter where your cat came from"))
+        val toy = Cat.Toy.from(obtainInput("Please enter where your cat came from"))
+        val vaccinated = Cat.Vaccinated.from(obtainInput("Is your cat vaccinated?"))
+        val color = Cat.Color.from(obtainInput("What is the color of your cat?"))
+        val birthDate = Cat.BirthDate.from(obtainInput("When did your cat birth <yyyy-MM-dd>?"))
 
-        if (origin.isNullOrBlank() || origin.isNullOrEmpty()) {
-            throw InvalidOrigin(origin)
-        }
-
-        if (toy.isNullOrBlank() || toy.isNullOrEmpty()) {
-            throw InvalidToy(toy)
-        }
-
-        if (color.isNullOrBlank() || color.isNullOrEmpty()) {
-            throw InvalidColor(color)
-        }
-
-        if (vaccinated.toBoolean()) {
-            val cat = Cat.vaccinatedWith(
-                id = UUID.fromString(id),
-                name = name.value,
-                origin = origin,
-                toy = toy,
-                birthDate = LocalDate.parse(birthDate),
-                color = color,
-                createdAt = clock.now(),
-            )
-            repository.save(cat)
-            return cat
-        } else {
-            val cat = Cat.notVaccinatedWith(
-                id = UUID.fromString(id),
-                name = name.value,
-                origin = origin,
-                toy = toy,
-                birthDate = LocalDate.parse(birthDate),
-                color = color,
-                createdAt = clock.now(),
-            )
-            repository.save(cat)
-            return cat
+        return Cat.from(
+            id = id,
+            name = name,
+            origin = origin,
+            toy = toy,
+            birthDate = birthDate,
+            color = color,
+            vaccinated = vaccinated,
+            createdAt = clock.now(),
+        ).apply {
+            repository.save(this)
+        }.also {
+            writer.write("Your cat has been successfully created $it")
         }
     }
 
-    private fun obtainInput(message: String) = writer.write(message).run { reader.read() }
+    private fun obtainInput(message: String): String? = writer.write(message).run { reader.read() }
 }

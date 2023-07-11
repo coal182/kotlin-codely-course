@@ -1,8 +1,8 @@
 package com.codely.demo.cat
 
+import com.codely.demo.shared.AgeCalculator
 import org.junit.jupiter.api.Test
 import java.time.LocalDate
-import java.util.*
 import kotlin.test.assertEquals
 
 class CatTest {
@@ -16,23 +16,25 @@ class CatTest {
 
     @Test
     fun `should create a vaccinated cat`() {
-        val actualCat = Cat.vaccinatedWith(
-            id = UUID.fromString(id),
-            name = name,
-            origin = origin,
-            toy = toy,
-            birthDate = LocalDate.parse(birthDate),
-            color = color,
+        val actualCat = Cat.from(
+            id = Cat.Id.from(id),
+            name = Cat.Name.from(name),
+            origin = Cat.Origin.from(origin),
+            toy = Cat.Toy.from(toy),
+            birthDate = Cat.BirthDate.from(birthDate),
+            color = Cat.Color.from(color),
+            vaccinated = Cat.Vaccinated.from("true"),
             createdAt = fixedDate,
         )
         val expectedCat = Cat(
-            id = UUID.fromString(id),
-            name = name,
-            origin = origin,
-            toy = toy,
-            vaccinated = true,
-            birthDate = LocalDate.parse(birthDate),
+            id = Cat.Id.from(id),
+            name = Cat.Name.from(name),
+            origin = Cat.Origin.from(origin),
+            toy = Cat.Toy.from(toy),
+            birthDate = Cat.BirthDate.from(birthDate),
             color = Cat.Color.valueOf(color.uppercase()),
+            vaccinated = Cat.Vaccinated.from("true"),
+            age = AgeCalculator.calculate(LocalDate.parse(birthDate), fixedDate).years,
             createdAt = fixedDate,
         )
 
@@ -41,23 +43,25 @@ class CatTest {
 
     @Test
     fun `should create a no vaccinated cat`() {
-        val actualCat = Cat.notVaccinatedWith(
-            id = UUID.fromString(id),
-            name = name,
-            origin = origin,
-            toy = toy,
-            birthDate = LocalDate.parse(birthDate),
-            color = color,
+        val actualCat = Cat.from(
+            id = Cat.Id.from(id),
+            name = Cat.Name.from(name),
+            origin = Cat.Origin.from(origin),
+            toy = Cat.Toy.from(toy),
+            birthDate = Cat.BirthDate.from(birthDate),
+            color = Cat.Color.from(color),
+            vaccinated = Cat.Vaccinated.from("false"),
             createdAt = fixedDate,
         )
         val expectedCat = Cat(
-            id = UUID.fromString(id),
-            name = name,
-            origin = origin,
-            toy = toy,
-            vaccinated = false,
-            birthDate = LocalDate.parse(birthDate),
+            id = Cat.Id.from(id),
+            name = Cat.Name.from(name),
+            origin = Cat.Origin.from(origin),
+            toy = Cat.Toy.from(toy),
+            birthDate = Cat.BirthDate.from(birthDate),
             color = Cat.Color.valueOf(color.uppercase()),
+            vaccinated = Cat.Vaccinated.from("false"),
+            age = AgeCalculator.calculate(LocalDate.parse(birthDate), fixedDate).years,
             createdAt = fixedDate,
         )
 
